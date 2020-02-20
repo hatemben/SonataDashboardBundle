@@ -55,8 +55,8 @@ final class SonataDashboardExtension extends Extension
         $container->setParameter('sonata.dashboard.block.class', $config['class']['block']);
         $container->setParameter('sonata.dashboard.dashboard.class', $config['class']['dashboard']);
 
-        $container->setParameter('sonata.dashboard.admin.block.entity', $config['class']['block']);
-        $container->setParameter('sonata.dashboard.admin.dashboard.entity', $config['class']['dashboard']);
+        $container->setParameter('sonata.dashboard.admin.block.document', $config['class']['block']);
+        $container->setParameter('sonata.dashboard.admin.dashboard.document', $config['class']['dashboard']);
 
         $container->setParameter(
             'sonata.dashboard.admin.dashboard.templates.compose',

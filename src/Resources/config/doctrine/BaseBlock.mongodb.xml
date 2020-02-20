@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
+                    http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
+    <mapped-superclass name="Sonata\DashboardBundle\Document\BaseBlock">
+        <field name="name" type="string" field-name="name" length="255" nullable="true"/>
+        <field name="type" type="string" field-name="type" length="64"/>
+        <field name="settings" type="json" field-name="settings"/>
+        <field name="enabled" type="boolean" field-name="enabled" nullable="true">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="position" type="integer" field-name="position" nullable="true"/>
+        <field name="createdAt" type="datetime" field-name="created_at"/>
+        <field name="updatedAt" type="datetime" field-name="updated_at"/>
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist"/>
+            <lifecycle-callback type="preUpdate" method="preUpdate"/>
+        </lifecycle-callbacks>
+    </mapped-superclass>
+</doctrine-mongo-mapping>

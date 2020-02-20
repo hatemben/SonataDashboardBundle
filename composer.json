@@ -1,5 +1,5 @@
 {
-    "name": "sonata-project/dashboard-bundle",
+    "name": "sonata-project/dashboard-mongodb-bundle",
     "type": "symfony-bundle",
     "description": "Provides a Dashboard management through container and block services",
     "keywords": [
