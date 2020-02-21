@@ -16,7 +16,7 @@
         <service id="sonata.dashboard.admin.dashboard" class="%sonata.dashboard.admin.dashboard.class%" public="true">
             <tag name="sonata.admin" manager_type="orm" group="%sonata.dashboard.admin.groupname%" label_catalogue="%sonata.dashboard.admin.dashboard.translation_domain%" label="dashboard" label_translator_strategy="sonata.admin.label.strategy.underscore" icon="%sonata.dashboard.admin.groupicon%"/>
             <argument/>
-            <argument>%sonata.dashboard.admin.dashboard.entity%</argument>
+            <argument>%sonata.dashboard.admin.dashboard.document%</argument>
             <argument>%sonata.dashboard.admin.dashboard.controller%</argument>
             <call method="addChild">
                 <argument type="service" id="sonata.dashboard.admin.block"/>
@@ -36,7 +36,7 @@
         <service id="sonata.dashboard.admin.block" class="%sonata.dashboard.admin.block.class%" public="true">
             <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false" group="%sonata.dashboard.admin.groupname%" label_catalogue="%sonata.dashboard.admin.dashboard.translation_domain%" label="block" label_translator_strategy="sonata.admin.label.strategy.underscore" icon="%sonata.dashboard.admin.groupicon%"/>
             <argument/>
-            <argument>%sonata.dashboard.admin.block.entity%</argument>
+            <argument>%sonata.dashboard.admin.block.document%</argument>
             <argument>%sonata.dashboard.admin.block.controller%</argument>
             <call method="setCacheManager">
                 <argument type="service" id="sonata.cache.manager"/>

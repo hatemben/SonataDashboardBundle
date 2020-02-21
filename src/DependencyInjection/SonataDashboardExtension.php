@@ -37,7 +37,7 @@ final class SonataDashboardExtension extends Extension
         $loader->load('block.xml');
         $loader->load('dashboard.xml');
         $loader->load('http_kernel.xml');
-        $loader->load('orm.xml');
+        $loader->load('doctrine_mongodb.xml');
         $loader->load('twig.xml');
 
         $this->registerDoctrineMapping($config);
