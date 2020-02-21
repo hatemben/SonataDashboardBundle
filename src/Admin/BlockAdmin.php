@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\DashboardBundle\Admin;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -366,13 +366,9 @@ final class BlockAdmin extends AbstractAdmin
             if ($isStandardBlock && $dashboard && !empty($containerBlockTypes)) {
                 $formMapper->add('parent', EntityType::class, [
                     'class' => $this->getClass(),
-                    'query_builder' => static function (EntityRepository $repository) use ($dashboard, $containerBlockTypes) {
-                        return $repository->createQueryBuilder('a')
-                            ->andWhere('a.dashboard = :dashboard AND a.type IN (:types)')
-                            ->setParameters([
-                                'dashboard' => $dashboard,
-                                'types' => $containerBlockTypes,
-                            ]);
+                    'query_builder' => static function (DocumentRepository $repository) use ($dashboard, $containerBlockTypes) {
+                        return $repository->getDocumentManager()
+                            ->find(['dashboard'=>$dashboard,'types' => $containerBlockTypes]);
                     },
                 ], [
                     'admin_code' => $this->getCode(),
