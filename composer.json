@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "doctrine/orm": "^2.6",
+        "doctrine/mongodb-odm": "^2.0",
         "sonata-project/admin-bundle": "^3.58",
         "sonata-project/block-bundle": "^3.18",
         "sonata-project/cache-bundle": "^2.4.2",
