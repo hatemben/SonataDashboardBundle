@@ -38,10 +38,10 @@ final class BlockManager extends BaseDocumentManager implements BlockManagerInte
     public function updatePosition(int $id, int $position, ?int $parentId = null, ?int $dashboardId = null, bool $partial = true): ?BlockInterface
     {
         if ($partial) {
-            $meta = $this->getEntityManager()->getClassMetadata($this->getClass());
+            $meta = $this->getDocumentManager()->getClassMetadata($this->getClass());
 
             // retrieve object references
-            $block = $this->getEntityManager()->getReference($this->getClass(), $id);
+            $block = $this->getDocumentManager()->getReference($this->getClass(), $id);
 
             if (!$block instanceof DashboardBlockInterface) {
                 throw new \InvalidArgumentException('Invalid block element found');
@@ -55,7 +55,7 @@ final class BlockManager extends BaseDocumentManager implements BlockManagerInte
             }
 
             $parentRelation = $meta->getAssociationMapping('parent');
-            $parent = $this->getEntityManager()->getPartialReference($parentRelation['targetEntity'], $parentId);
+            $parent = $this->getDocumentManager()->getPartialReference($parentRelation['targetEntity'], $parentId);
 
             if (!$parent instanceof DashboardBlockInterface) {
                 throw new \InvalidArgumentException('Invalid parent block element found');
@@ -69,7 +69,7 @@ final class BlockManager extends BaseDocumentManager implements BlockManagerInte
 
         // set new values
         $block->setPosition($position);
-        $this->getEntityManager()->persist($block);
+        $this->getDocumentManager()->persist($block);
 
         return $block;
     }
