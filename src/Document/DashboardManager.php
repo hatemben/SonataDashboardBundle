@@ -22,8 +22,58 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
  *
  * @author Quentin Somazzi <qsomazzi@ekino.com>
  */
-final class DashboardManager extends BaseDashboard implements DashboardManagerInterface
+class DashboardManager extends BaseDashboard implements DashboardManagerInterface
 {
+    public function getClass()
+    {
+        // TODO: Implement getClass() method.
+    }
+
+    public function find($id)
+    {
+        // TODO: Implement find() method.
+    }
+
+    public function findAll()
+    {
+        // TODO: Implement findAll() method.
+    }
+
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    {
+        // TODO: Implement findBy() method.
+    }
+
+    public function findOneBy(array $criteria, array $orderBy = null)
+    {
+        // TODO: Implement findOneBy() method.
+    }
+
+    public function save($entity, $andFlush = true)
+    {
+        // TODO: Implement save() method.
+    }
+
+    public function create()
+    {
+        // TODO: Implement create() method.
+    }
+
+    public function delete($entity, $andFlush = true)
+    {
+        // TODO: Implement delete() method.
+    }
+
+    public function getTableName()
+    {
+        // TODO: Implement getTableName() method.
+    }
+
+    public function getConnection()
+    {
+        // TODO: Implement getConnection() method.
+    }
+
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()
@@ -61,4 +111,6 @@ final class DashboardManager extends BaseDashboard implements DashboardManagerIn
 
         return $pager;
     }
+
+
 }

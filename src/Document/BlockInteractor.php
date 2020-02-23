@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Sonata\DashboardBundle\Document;
 
-use Doctrine\ORM\EntityManager;
+//use Doctrine\ORM\EntityManager;
+use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Sonata\DashboardBundle\Model\BlockInteractorInterface;
 use Sonata\DashboardBundle\Model\BlockManagerInterface;
 use Sonata\DashboardBundle\Model\DashboardBlockInterface;
 use Sonata\DashboardBundle\Model\DashboardInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+//use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * This class interacts with blocks.
@@ -52,7 +54,7 @@ final class BlockInteractor implements BlockInteractorInterface
      * @param BlockManagerInterface $blockManager     Block manager
      * @param string                $defaultContainer
      */
-    public function __construct(RegistryInterface $registry, BlockManagerInterface $blockManager, $defaultContainer)
+    public function __construct(ManagerRegistry $registry, BlockManagerInterface $blockManager, $defaultContainer)
     {
         $this->blockManager = $blockManager;
         $this->registry = $registry;
@@ -61,7 +63,8 @@ final class BlockInteractor implements BlockInteractorInterface
 
     public function getBlock(int $id): ?DashboardBlockInterface
     {
-        return $this->getEntityManager()->createQueryBuilder()
+        return $this->getDocumentManager()
+            ->findOne()
             ->select('b')
             ->from($this->blockManager->getClass(), 'b')
             ->where('b.id = :id')
@@ -87,7 +90,7 @@ final class BlockInteractor implements BlockInteractorInterface
 
     public function saveBlocksPosition(array $data = [], bool $partial = true): void
     {
-        $em = $this->getEntityManager();
+        $em = $this->getDocumentManager();
         $em->getConnection()->beginTransaction();
 
         try {

@@ -20,10 +20,6 @@ namespace Sonata\DashboardBundle\Model;
  */
 abstract class Dashboard implements DashboardInterface
 {
-    /**
-     * @var int|null
-     */
-    protected $id;
 
     /**
      * @var \DateTime|null
@@ -55,6 +51,10 @@ abstract class Dashboard implements DashboardInterface
      */
     protected $default;
 
+
+    protected $path;
+
+
     public function __construct()
     {
         $this->blocks = [];
@@ -63,18 +63,6 @@ abstract class Dashboard implements DashboardInterface
     public function __toString()
     {
         return $this->getName() ?: '-';
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function setId(?int $id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTime
@@ -147,5 +135,10 @@ abstract class Dashboard implements DashboardInterface
     public function getBlocks()
     {
         return $this->blocks;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

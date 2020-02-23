@@ -6,7 +6,7 @@
                 <option name="default">0</option>
             </options>
         </field>
-        <field name="default" type="boolean" column="is_default">
+        <field name="default" type="boolean" column="isdefault">
             <options>
                 <option name="default">0</option>
             </options>

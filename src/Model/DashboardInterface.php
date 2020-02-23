@@ -18,10 +18,6 @@ namespace Sonata\DashboardBundle\Model;
  */
 interface DashboardInterface
 {
-    public function getId(): ?int;
-
-    public function setId(?int $id);
-
     public function setEnabled(bool $enabled);
 
     public function getEnabled(): bool;

@@ -23,10 +23,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
  */
 abstract class Block extends BaseBlock implements DashboardBlockInterface
 {
-    /**
-     * @var mixed|null
-     */
-    protected $id;
+
 
     /**
      * @var DashboardInterface|null
