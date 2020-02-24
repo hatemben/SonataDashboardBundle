@@ -6,7 +6,7 @@
     <mapped-superclass name="Sonata\DashboardBundle\Document\BaseBlock">
         <field name="name" type="string" field-name="name" nullable="true"/>
         <field name="type" type="string" field-name="type"/>
-        <field name="settings" type="json" field-name="settings"/>
+        <field name="settings" type="hash" field-name="settings"/>
         <field name="enabled" type="boolean" field-name="enabled" nullable="true"/>
         <field name="position" type="integer" field-name="position" nullable="true"/>
         <field name="createdAt" type="date" field-name="createdAt"/>
