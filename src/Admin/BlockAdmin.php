@@ -28,12 +28,12 @@ use Sonata\Cache\CacheManagerInterface;
 use Sonata\DashboardBundle\Mapper\DashboardFormMapper;
 use Sonata\DashboardBundle\Model\DashboardBlockInterface;
 use Sonata\DashboardBundle\Model\DashboardInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType;
 
 /**
  * Abstract admin class for the Block model.
@@ -362,13 +362,19 @@ final class BlockAdmin extends AbstractAdmin
 
             $service = $this->blockManager->get($block);
 
+            $className = $this->getClass();
             // need to investigate on this case where $dashboard == null ... this should not be possible
             if ($isStandardBlock && $dashboard && !empty($containerBlockTypes)) {
-                $formMapper->add('parent', EntityType::class, [
-                    'class' => $this->getClass(),
+                $formMapper->add('parent', DocumentType::class, [
+                    'class' => $className,
                     'query_builder' => static function (DocumentRepository $repository) use ($dashboard, $containerBlockTypes) {
+                        // Need to update class name, Block::class return the base block class
                         return $repository->getDocumentManager()
-                            ->find(['dashboard'=>$dashboard,'types' => $containerBlockTypes]);
+                            ->createQueryBuilder('App\Application\Sonata\DashboardBundle\Document\Block')
+                            ->field('dashboard.$id')->equals($dashboard->getId())
+                            ->field('type')->in($containerBlockTypes)
+                            ->getQuery()
+                        ->getSingleResult();
                     },
                 ], [
                     'admin_code' => $this->getCode(),
