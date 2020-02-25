@@ -54,7 +54,7 @@ file that was distributed with this source code.
         </div>
         <script>
             $(document).ready(function () {
-                var composer = new DashboardComposer({{ object.id }}, {
+                var composer = new DashboardComposer('{{ object.id }}', {
                     translations: {
                         cancel: "{{ 'cancel'|trans({}, 'SonataDashboardBundle') }}",
                         preview_error: "{{ 'compose.preview_error'|trans({}, 'SonataDashboardBundle') }}",
