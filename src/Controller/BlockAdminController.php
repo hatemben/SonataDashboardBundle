@@ -15,7 +15,7 @@ namespace Sonata\DashboardBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\DashboardBundle\Admin\BlockAdmin;
-use Sonata\DashboardBundle\Entity\BaseBlock;
+use Sonata\DashboardBundle\Document\BaseBlock;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
