@@ -17,7 +17,7 @@ class Dashboard extends BaseDashboard
 
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="App\Application\Sonata\DashboardBundle\Document\Block")
+     * @MongoDB\ReferenceMany(targetDocument="App\Application\Sonata\DashboardBundle\Document\Block", mappedBy="dashboard")
      */
     protected $blocks;
 }

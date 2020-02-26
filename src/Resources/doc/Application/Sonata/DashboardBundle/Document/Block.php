@@ -15,14 +15,23 @@ class Block extends BaseBlock
      */
     protected $id;
 
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="App\Application\Sonata\DashboardBundle\Document\Block")
+     * @MongoDB\ReferenceOne(targetDocument="App\Application\Sonata\DashboardBundle\Document\Dashboard", inversedBy="blocks")
+     */
+    protected $dashboard;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="App\Application\Sonata\DashboardBundle\Document\Block",inversedBy="children")
      */
     protected $parent;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="App\Application\Sonata\DashboardBundle\Document\Block")
+     * @MongoDB\ReferenceMany(targetDocument="App\Application\Sonata\DashboardBundle\Document\Block",mappedBy="parent",sort={"name": "asc"})
      */
     protected $children;
 }
