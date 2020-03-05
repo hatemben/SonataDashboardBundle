@@ -58,7 +58,8 @@ final class DashboardAdminController extends CRUDController
             'action' => 'edit',
             'containers' => $containers,
             'csrfTokens' => [
-                'remove' => $this->getCsrfToken('sonata.dashboard'),
+                'remove' => $this->getCsrfToken('sonata.delete'),
+                'switchEnabled' => $this->getCsrfToken('sonata.dashboard'),
             ],
         ]);
     }
@@ -107,6 +108,7 @@ final class DashboardAdminController extends CRUDController
         $containers = [];
 
         // separate containers
+
         foreach ($dashboard->getBlocks() as $block) {
             $blockCode = $block->getSetting('code');
             if (null === $block->getParent()) {
@@ -127,7 +129,8 @@ final class DashboardAdminController extends CRUDController
             'containers' => $containers,
             'dashboards' => $dashboards,
             'csrfTokens' => [
-                'remove' => $this->getCsrfToken('sonata.dashboard'),
+                'remove' => $this->getCsrfToken('sonata.delete'),
+                'switchEnabled' => $this->getCsrfToken('sonata.dashboard'),
             ],
         ]);
     }
