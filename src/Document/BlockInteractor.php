@@ -16,6 +16,7 @@ namespace Sonata\DashboardBundle\Document;
 //use Doctrine\ORM\EntityManager;
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use MongoDB\BSON\ObjectId;
 use Sonata\DashboardBundle\Model\BlockInteractorInterface;
 use Sonata\DashboardBundle\Model\BlockManagerInterface;
 use Sonata\DashboardBundle\Model\DashboardBlockInterface;
@@ -63,35 +64,21 @@ final class BlockInteractor implements BlockInteractorInterface
 
     public function getBlock(int $id): ?DashboardBlockInterface
     {
-        return $this->getDocumentManager()
-            ->findOne()
-            ->select('b')
-            ->from($this->blockManager->getClass(), 'b')
-            ->where('b.id = :id')
-            ->setParameters([
-                'id' => $id,
-            ])
-            ->setMaxResults(1)
+        return $this->getDocumentManager()->createQueryBuilder($this->blockManager->getClass())
+            ->field('_id')->equals($id)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getSingleResult();
     }
 
     public function getBlocksById(DashboardInterface $dashboard)
     {
-        $blocks = $this->getEntityManager()
-            ->createQuery(sprintf('SELECT b FROM %s b INDEX BY b.id WHERE b.dashboard = :dashboard ORDER BY b.position ASC', $this->blockManager->getClass()))
-            ->setParameters([
-                'dashboard' => $dashboard->getId(),
-            ])
-            ->execute();
-
-        return $blocks;
+        return $this->getDocumentManager()->getRepository($this->blockManager->getClass())
+            ->findBy(['dashboard.$id' => new ObjectId($dashboard->getId())]);
     }
 
     public function saveBlocksPosition(array $data = [], bool $partial = true): void
     {
         $em = $this->getDocumentManager();
-        $em->getConnection()->beginTransaction();
 
         try {
             foreach ($data as $block) {
@@ -103,9 +90,8 @@ final class BlockInteractor implements BlockInteractorInterface
             }
 
             $em->flush();
-            $em->getConnection()->commit();
         } catch (\Exception $e) {
-            $em->getConnection()->rollBack();
+            $em->rollBack();
 
             throw $e;
         }
@@ -179,7 +165,7 @@ final class BlockInteractor implements BlockInteractorInterface
         return $blocks;
     }
 
-    private function getEntityManager(): EntityManager
+    private function getDocumentManager(): DocumentManager
     {
         return $this->registry->getManagerForClass($this->blockManager->getClass());
     }
