@@ -22,13 +22,13 @@ interface BlockManagerInterface extends ManagerInterface, PageableManagerInterfa
     /**
      * Updates position for given block.
      *
-     * @param int  $id          Block Id
+     * @param string  $id          Block Id
      * @param int  $position    New Position
-     * @param int  $parentId    Parent block Id (needed when partial = true)
-     * @param int  $dashboardId Dashboard Id (needed when partial = true)
+     * @param string  $parentId    Parent block Id (needed when partial = true)
+     * @param string  $dashboardId Dashboard Id (needed when partial = true)
      * @param bool $partial     Should we use partial references? (Better for performance, but can lead to query issues.)
      *
      * @return BlockInterface
      */
-    public function updatePosition(int $id, int $position, ?int $parentId = null, ?int $dashboardId = null, bool $partial = true): ?BlockInterface;
+    public function updatePosition(string $id, string $position, ?string $parentId = null, ?string $dashboardId = null, bool $partial = true): ?BlockInterface;
 }

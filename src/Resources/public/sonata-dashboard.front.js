@@ -409,7 +409,6 @@ Sonata.Dashboard = {
                 diff.push(found[0]);
             }
         });
-
         return diff;
     },
 

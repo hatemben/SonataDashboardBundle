@@ -252,10 +252,10 @@
         handleBlockParentSwitched: function (event) {
             var $previousParentPreview  = $('.block-preview-' + event.previousParentId),
                 $oldChildCountIndicator = $previousParentPreview.find('.child-count'),
-                oldChildCount           = parseInt($oldChildCountIndicator.text().trim(), 10),
+                oldChildCount           = $oldChildCountIndicator.text().trim(),
                 $newParentPreview       = $('.block-preview-' + event.newParentId),
                 $newChildCountIndicator = $newParentPreview.find('.child-count'),
-                newChildCount           = parseInt($newChildCountIndicator.text().trim(), 10);
+                newChildCount           = $newChildCountIndicator.text().trim();
 
             this.updateChildCount(event.previousParentId, oldChildCount - 1);
             this.updateChildCount(event.newParentId,      newChildCount + 1);
@@ -555,7 +555,7 @@
                 $switchLblIcon = $switchLabel.find('i'),
                 switchUrl      = $switchButton.attr('href'),
                 enabled        = parseInt($childBlock.attr('data-block-enabled'), 2);
-                parentId       = parseInt($childBlock.attr('data-parent-block-id'), 10);
+                parentId       = $childBlock.attr('data-parent-block-id');
 
             $edit.click(function (e) {
                 e.preventDefault();
@@ -743,9 +743,9 @@
                         // pending block creation has an undefined child id
                         if (typeof childId != 'undefined') {
                             newPositions.push({
-                                'id':        parseInt(childId, 10),
+                                'id':        childId,
                                 'position':  position,
-                                'parent_id': parseInt(parentId, 10),
+                                'parent_id': parentId,
                                 'dashboard_id':   self.dashboardId
                             });
                         }
@@ -850,9 +850,9 @@
                             ui.helper.remove();
 
                             var $container     = $(this),
-                                parentId       = parseInt(ui.draggable.attr('data-parent-block-id'), 10),
-                                containerId    = parseInt($container.attr('data-block-id'), 10);
-                                droppedBlockId = parseInt(droppedBlockId, 10);
+                                parentId       = ui.draggable.attr('data-parent-block-id'),
+                                containerId    = $container.attr('data-block-id');
+                                droppedBlockId = droppedBlockId;
 
                             if (parentId !== containerId) {
                                 // play animation on drop, remove class on animation end to be able to re-apply
