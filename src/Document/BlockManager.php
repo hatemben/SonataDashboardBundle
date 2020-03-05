@@ -35,7 +35,7 @@ final class BlockManager extends BaseDocumentManager implements BlockManagerInte
         return $dashboard;
     }
 
-    public function updatePosition(int $id, int $position, ?int $parentId = null, ?int $dashboardId = null, bool $partial = true): ?BlockInterface
+    public function updatePosition(string $id, string $position, ?string $parentId = null, ?string $dashboardId = null, bool $partial = true): ?BlockInterface
     {
         if ($partial) {
             $meta = $this->getDocumentManager()->getClassMetadata($this->getClass());
@@ -48,7 +48,7 @@ final class BlockManager extends BaseDocumentManager implements BlockManagerInte
             }
 
             $dashboardRelation = $meta->getAssociationMapping('dashboard');
-            $dashboard = $this->getEntityManager()->getPartialReference($dashboardRelation['targetEntity'], $dashboardId);
+            $dashboard = $this->getDocumentManager()->getPartialReference($dashboardRelation['targetEntity'], $dashboardId);
 
             if (!$dashboard instanceof DashboardInterface) {
                 throw new \InvalidArgumentException('Invalid dashboard block element found');
@@ -65,6 +65,7 @@ final class BlockManager extends BaseDocumentManager implements BlockManagerInte
             $block->setParent($parent);
         } else {
             $block = $this->find($id);
+
         }
 
         // set new values
