@@ -302,6 +302,10 @@
                 <source>breadcrumb.link_dashboard_block_update</source>
                 <target>Update</target>
             </trans-unit>
+            <trans-unit id="79" resname="sonata.dashboard.block.counter">
+                <source>sonata.dashboard.block.counter</source>
+                <target>Counter</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
