@@ -1,0 +1,29 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+<div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-{{ settings.color }}">
+        <div class="inner">
+            <h3>{{ count }}</h3>
+
+            <p>{{ className }}</p>
+        </div>
+        <div class="icon">
+            <i class="ion ion-{{ settings.icon }}"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+</div>
+{% endblock %}

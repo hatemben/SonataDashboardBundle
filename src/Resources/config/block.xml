@@ -2,12 +2,20 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sonata.dashboard.block.container.class">Sonata\DashboardBundle\Block\ContainerBlockService</parameter>
+        <parameter key="sonata.dashboard.block.counter.class">Sonata\DashboardBundle\Block\CounterBlockService</parameter>
     </parameters>
     <services>
         <service id="sonata.dashboard.block.container" class="%sonata.dashboard.block.container.class%" public="true">
             <tag name="sonata.block" context="internal"/>
             <argument>sonata.dashboard.block.container</argument>
             <argument type="service" id="sonata.templating"/>
+        </service>
+
+        <service id="sonata.block.service.counter" class="%sonata.dashboard.block.counter.class%" public="true">
+            <tag name="sonata.block"/>
+            <argument>sonata.dashboard.block.counter</argument>
+            <argument type="service" id="sonata.templating"/>
+            <argument type="service" id="Doctrine\Bundle\MongoDBBundle\ManagerRegistry"/>
         </service>
     </services>
 </container>
