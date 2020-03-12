@@ -66,7 +66,8 @@ class IconChoiceType extends AbstractType
             foreach ($matches as list(, $class, $code)) {
                 // this may vary depending on the version of Symfony,
                 // if the class name is displayed instead of the icon then swap the key/value
-                $this->choices[str_replace('fa-','',$class).' &#x'.$code.';'] = $class;
+               // $this->choices[str_replace('fa-','',$class).' &#x'.$code.';'] = $class;
+                $this->choices[str_replace('fa-','',$class)] = $class;
             }
         }
         return $this->choices;
