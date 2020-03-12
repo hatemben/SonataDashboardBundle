@@ -97,4 +97,12 @@ final class CounterBlockService extends AbstractAdminBlockService
             'class' => 'fa fa-pie-chart',
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'Counter (Dashboard)';
+    }
 }
