@@ -4,6 +4,7 @@ namespace Sonata\DashboardBundle\Block;
 
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\DashboardBundle\Form\Type\IconChoiceType;
 use Sonata\Form\Type\ImmutableArrayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -54,13 +55,7 @@ final class CounterBlockService extends AbstractAdminBlockService
                             'green' => 'green',
                             'red' => 'red',
                         ]]],
-                    ['icon', ChoiceType::class, ['required' => false,
-                        'choices' => [
-                            'bag' => 'bag',
-                            'pie-graph' => 'pie-graph',
-                            'person-add' => 'person-add',
-                            'stats-bars' => 'stats-bars'
-                        ]]],
+                    ['icon', IconChoiceType::class, ['required' => false]],
                     ['object', ChoiceType::class, ['required' => false,
                         'choices' =>[
                             'User'=>'App\Document\User',
